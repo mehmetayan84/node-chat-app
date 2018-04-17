@@ -16,14 +16,12 @@ io.on('connection', (socket) => {
    console.log('New user is connected');
 
    socket.on('createMessage', (message) => {
-       console.log('New message is received\n',JSON.stringify(message, undefined, 2));
+       io.emit('newMessage', {
+           from: message.from,
+           text: message.text,
+           createdAt: new Date().getTime()
+       });
    });
-
-    socket.emit('newMessage', {
-        from: 'Ece',
-        text: 'See you then',
-        createdAt: new Date().getTime()
-    });
 
     socket.on('disconnect', () => {
         console.log('User disconnected from the server');
