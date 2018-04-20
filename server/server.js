@@ -22,7 +22,7 @@ io.on('connection', (socket) => {
 
    socket.on('createMessage', (message, callback) => {
        io.emit('newMessage', generateMessage(message.from, message.text));
-       callback('got it!');
+       callback();
        // socket.broadcast.emit('newMessage', {
        //     from: message.from,
        //     text: message.text,
@@ -31,8 +31,8 @@ io.on('connection', (socket) => {
    });
 
    socket.on('createLocationMessage', (message, callback) => {
-      io.emit('newLocationMessage',generateLocationMessage('Admin', message.lattitude, message.longitude));
-      callback('Your location has come and shared with others');
+      io.emit('newLocationMessage',generateLocationMessage('Admin', message.latitude, message.longitude));
+      callback();
    });
 
     socket.on('disconnect', () => {
